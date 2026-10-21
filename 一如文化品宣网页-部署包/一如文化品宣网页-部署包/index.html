@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一如文化 · 企业品牌宣传方案</title>
+<style>
+  :root {
+    --paper: #f6f3ec;
+    --paper-deep: #efeae0;
+    --ink: #1c1a17;
+    --ink-soft: #4a463f;
+    --ink-faint: #8a8478;
+    --cinnabar: #9e3b2f;
+    --cinnabar-soft: rgba(158, 59, 47, 0.08);
+    --hairline: rgba(28, 26, 23, 0.14);
+    --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
+    --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- 布局骨架 ---------- */
+  .layout {
+    display: flex;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+    gap: 64px;
+  }
+  aside.toc {
+    width: 220px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 0;
+  }
+  main {
+    flex: 1;
+    min-width: 0;
+    max-width: 760px;
+  }
+
+  /* ---------- 侧边目录 ---------- */
+  .toc-brand {
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    color: var(--cinnabar);
+    margin-bottom: 28px;
+    padding-left: 18px;
+  }
+  .toc nav ol { list-style: none; }
+  .toc nav a {
+    display: block;
+    padding: 7px 18px;
+    font-size: 13.5px;
+    color: var(--ink-faint);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: color .25s, border-color .25s, background .25s;
+    letter-spacing: 0.04em;
+  }
+  .toc nav a:hover { color: var(--ink); }
+  .toc nav a.active {
+    color: var(--ink);
+    border-left-color: var(--cinnabar);
+    background: linear-gradient(90deg, var(--cinnabar-soft), transparent 80%);
+  }
+  .toc-foot {
+    margin-top: 28px;
+    padding-left: 18px;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    letter-spacing: 0.12em;
+  }
+
+  /* ---------- 封面 ---------- */
+  header.cover {
+    padding: 120px 0 72px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .cover-kicker {
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    color: var(--cinnabar);
+    margin-bottom: 30px;
+  }
+  .cover h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(30px, 4.6vw, 46px);
+    letter-spacing: 0.06em;
+    line-height: 1.45;
+    margin-bottom: 28px;
+  }
+  .cover .lede {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 620px;
+    margin-bottom: 52px;
+  }
+  .cover-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--hairline);
+  }
+  .cover-meta .cell {
+    padding: 20px 4px 20px 0;
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    gap: 18px;
+    align-items: baseline;
+  }
+  .cover-meta .k {
+    font-family: var(--serif);
+    font-size: 13.5px;
+    color: var(--cinnabar);
+    white-space: nowrap;
+    letter-spacing: 0.2em;
+  }
+  .cover-meta .v { font-size: 14px; color: var(--ink-soft); }
+  .thesis {
+    margin-top: 56px;
+    padding: 30px 34px;
+    background: var(--paper-deep);
+    border-left: 3px solid var(--cinnabar);
+  }
+  .thesis .tag {
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--cinnabar);
+    margin-bottom: 12px;
+  }
+  .thesis p { font-size: 15px; color: var(--ink-soft); }
+
+  /* ---------- 章节 ---------- */
+  section.chap {
+    padding: 88px 0 24px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .chap-head {
+    display: flex;
+    align-items: baseline;
+    gap: 22px;
+    margin-bottom: 14px;
+  }
+  .chap-no {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--cinnabar);
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .chap-head h2 {
+    font-family: var(--serif);
+    font-size: clamp(21px, 2.6vw, 27px);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .chap-intro {
+    color: var(--ink-soft);
+    margin-bottom: 34px;
+    font-size: 15px;
+  }
+  h3 {
+    font-family: var(--serif);
+    font-size: 17.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin: 44px 0 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  h3::before {
+    content: "";
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--cinnabar);
+    transform: rotate(45deg) translateY(-1px);
+    flex-shrink: 0;
+  }
+  section.chap p.body { color: var(--ink-soft); margin-bottom: 14px; }
+  section.chap p.body strong { color: var(--ink); font-weight: 600; }
+  em.term { font-style: normal; color: var(--cinnabar); }
+
+  /* ---------- 表格 ---------- */
+  .table-wrap {
+    margin: 18px 0 8px;
+    overflow-x: auto;
+    border-top: 2px solid var(--ink);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  thead th {
+    font-family: var(--serif);
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 13px 16px 13px 0;
+    border-bottom: 1px solid var(--ink);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 14px 16px 14px 0;
+    border-bottom: 1px solid var(--hairline);
+    vertical-align: top;
+    color: var(--ink-soft);
+  }
+  tbody tr:hover td { background: var(--cinnabar-soft); }
+  td.lead, th.lead { white-space: nowrap; }
+  td.lead {
+    font-family: var(--serif);
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- 列表 ---------- */
+  ul.plain { list-style: none; margin: 10px 0 8px; }
+  ul.plain li {
+    position: relative;
+    padding: 9px 0 9px 26px;
+    color: var(--ink-soft);
+    border-bottom: 1px dashed var(--hairline);
+  }
+  ul.plain li:last-child { border-bottom: none; }
+  ul.plain li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 21px;
+    width: 7px; height: 1.5px;
+    background: var(--cinnabar);
+  }
+  ul.plain li strong { color: var(--ink); font-weight: 600; }
+
+  .note {
+    margin-top: 26px;
+    padding: 18px 24px;
+    background: var(--paper-deep);
+    font-size: 13.5px;
+    color: var(--ink-faint);
+    line-height: 1.85;
+  }
+  .note strong { color: var(--ink-soft); }
+
+  /* ---------- 90天清单 ---------- */
+  .steps { margin-top: 8px; }
+  .step {
+    display: flex;
+    gap: 26px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-idx {
+    flex-shrink: 0;
+    width: 64px;
+  }
+  .step-idx .num {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--cinnabar);
+    line-height: 1.2;
+  }
+  .step-idx .range {
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+  }
+  .step-body h4 {
+    font-family: var(--serif);
+    font-size: 16.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .step-body ul { margin-top: 4px; }
+
+  /* ---------- 尾声 ---------- */
+  footer.coda {
+    padding: 72px 0 120px;
+    text-align: center;
+  }
+  footer.coda p {
+    font-family: var(--serif);
+    font-size: 14.5px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    max-width: 560px;
+    margin: 0 auto 26px;
+    line-height: 2.1;
+  }
+  .seal-line {
+    width: 40px; height: 3px;
+    background: var(--cinnabar);
+    margin: 0 auto;
+  }
+
+  /* ---------- 顶部窄屏导航 ---------- */
+  .mobile-bar {
+    display: none;
+  }
+
+  @media (max-width: 960px) {
+    .layout { padding: 0 22px; gap: 0; }
+    aside.toc { display: none; }
+    header.cover { padding-top: 84px; }
+    .cover-meta { grid-template-columns: 1fr; }
+    .mobile-bar {
+      display: block;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: rgba(246, 243, 236, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .mobile-bar summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 22px;
+      font-family: var(--serif);
+      font-size: 13.5px;
+      letter-spacing: 0.2em;
+      color: var(--ink);
+    }
+    .mobile-bar summary::-webkit-details-marker { display: none; }
+    .mobile-bar .cur-chap { color: var(--cinnabar); }
+    .mobile-bar nav ol { list-style: none; padding: 4px 22px 14px; }
+    .mobile-bar nav a {
+      display: block;
+      padding: 8px 0;
+      font-size: 14px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--hairline);
+    }
+    .mobile-bar nav li:last-child a { border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 移动端顶部目录 -->
+<details class="mobile-bar">
+  <summary><span>目 录</span><span class="cur-chap">一如文化 · 品牌宣传方案</span></summary>
+  <nav>
+    <ol>
+      <li><a href="#cover">封面 · 方案概览</a></li>
+      <li><a href="#c1">一 · 方案定位与目标</a></li>
+      <li><a href="#c2">二 · 品牌价值与沟通主线</a></li>
+      <li><a href="#c3">三 · 目标受众分层与诉求</a></li>
+      <li><a href="#c4">四 · 品宣内容模块</a></li>
+      <li><a href="#c5">五 · 品宣方式 / 渠道矩阵</a></li>
+      <li><a href="#c6">六 · 年度内容节奏</a></li>
+      <li><a href="#c7">七 · 合规与宗教敏感性管理</a></li>
+      <li><a href="#c8">八 · 衡量指标</a></li>
+      <li><a href="#c9">九 · 落地优先级：90 天起步清单</a></li>
+    </ol>
+  </nav>
+</details>
+
+<div class="layout">
+
+  <!-- 桌面侧边目录 -->
+  <aside class="toc">
+    <div class="toc-brand">企业品宣 · 基础方案</div>
+    <nav>
+      <ol>
+        <li><a href="#cover">封面 · 方案概览</a></li>
+        <li><a href="#c1">一 · 方案定位与目标</a></li>
+        <li><a href="#c2">二 · 品牌价值与沟通主线</a></li>
+        <li><a href="#c3">三 · 目标受众分层与诉求</a></li>
+        <li><a href="#c4">四 · 品宣内容模块</a></li>
+        <li><a href="#c5">五 · 品宣方式 / 渠道矩阵</a></li>
+        <li><a href="#c6">六 · 年度内容节奏</a></li>
+        <li><a href="#c7">七 · 合规与宗教敏感性管理</a></li>
+        <li><a href="#c8">八 · 衡量指标</a></li>
+        <li><a href="#c9">九 · 落地优先级：90 天起步清单</a></li>
+      </ol>
+    </nav>
+    <div class="toc-foot">一如初心 · 成就庄严</div>
+  </aside>
+
+  <main>
+
+    <!-- 封面 -->
+    <header class="cover" id="cover">
+      <div class="cover-kicker">企业品宣 · 基础方案</div>
+      <h1>一如文化 · 企业品牌宣传方案</h1>
+      <p class="lede">基于现有业务与品牌特点，围绕「确立品牌认知与影响力」这一首要目标，发散梳理一套可落地的品宣内容、模块与方式，形成基础框架与起步路径。</p>
+
+      <div class="cover-meta">
+        <div class="cell"><span class="k">品牌对象</span><span class="v">宁波一如文化发展有限公司（一如）</span></div>
+        <div class="cell"><span class="k">首要目标</span><span class="v">品牌认知与影响力</span></div>
+        <div class="cell"><span class="k">核心受众</span><span class="v">寺院决策者 / 政府文旅·主管部门·投资机构 / 高净值禅修爱好者</span></div>
+        <div class="cell"><span class="k">起点</span><span class="v">有零散资产，待系统整合</span></div>
+      </div>
+
+      <div class="thesis">
+        <div class="tag">一句话主旨</div>
+        <p>先「立名、聚势、见行」，再外扩：以「一如初心，成就庄严」为主线，先盘点整合零散资产、搭好内容底座与品牌物料，再借新媒体、线下雅集与官网分层触达三类人群，逐步把「一如」沉淀为宗教文化空间营造领域的权威心智。</p>
+      </div>
+    </header>
+
+    <!-- 一 -->
+    <section class="chap" id="c1">
+      <div class="chap-head"><span class="chap-no">一</span><h2>方案定位与目标</h2></div>
+
+      <h3>1.1 品牌一句话定位</h3>
+      <p class="body">一如文化，是以「一如初心，成就庄严」为念的宗教文化空间整体营造者——集<em class="term">品牌策划、匠心设计、精工营造、智慧运营</em>于一体，为寺院、精舍、道场提供从理念到落地、从空间到运营的全生命周期解决方案。</p>
+
+      <h3>1.2 品宣首要目标</h3>
+      <p class="body">本阶段品宣不以即时获客转化为指标，而以建立并强化「一如」在宗教文化空间营造领域的<em class="term">心智认知与专业影响力</em>为核心。让目标人群在想到「寺院营造 / 宗教文化空间 / 传统空间营造」时，自然联想到一如，并认可其「虔敬、专业、庄严」。</p>
+
+      <h3>1.3 起点判断与推进逻辑</h3>
+      <p class="body">当前品牌资产零散（案例、图册、账号等未成体系）。因此推进逻辑为「盘点 → 整合 → 建底座 → 外扩」：先归一品牌语汇与视觉，再形成可复用的内容与物料底座，最后向多渠道铺开，避免「边铺边乱」。</p>
+    </section>
+
+    <!-- 二 -->
+    <section class="chap" id="c2">
+      <div class="chap-head"><span class="chap-no">二</span><h2>品牌价值与沟通主线</h2></div>
+
+      <h3>2.1 沟通金字塔（由核到外）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="lead">层级</th><th>内容</th><th>作用</th></tr></thead>
+          <tbody>
+            <tr><td class="lead">主张</td><td>一如初心，成就庄严</td><td>品牌记忆与价值锚点，贯穿所有触点</td></tr>
+            <tr><td class="lead">能力</td><td>品牌策划 · 匠心设计 · 精工营造 · 智慧运营</td><td>建立专业信任，说明「能做什么、如何做」</td></tr>
+            <tr><td class="lead">作品</td><td>真实项目案例的「从理念到落地」叙事</td><td>用实证建立口碑，是最有说服力的内容</td></tr>
+            <tr><td class="lead">文化</td><td>佛教文化、古建营造、东方空间美学的传承</td><td>拉高品牌立意，触达文化向与政策向人群</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2.2 沟通调性红线（与已有图册一致）</h3>
+      <ul class="plain">
+        <li><strong>视觉：</strong>墨黑留白、禅意、新中式；不出现具象人物、宗教符号、纹样图案。</li>
+        <li><strong>语言：</strong>虔敬、克制、四字格与对仗；不夸张、不世俗营销、不堆砌辞藻。</li>
+        <li><strong>伦理：</strong>正信、庄严、清净；不碰敏感义理、不夸大功德、不误导。</li>
+      </ul>
+    </section>
+
+    <!-- 三 -->
+    <section class="chap" id="c3">
+      <div class="chap-head"><span class="chap-no">三</span><h2>目标受众分层与诉求</h2></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="lead">受众</th><th>核心诉求</th><th>沟通重点</th><th>主触达方式</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="lead">寺院 / 宗教文化场所决策者</td>
+              <td>专业可信、工艺精良、虔敬合规、可交付</td>
+              <td>案例实证、工艺细节、全生命周期能力、团队（学者+古建+工匠）</td>
+              <td>行业口碑、案例库、一对一、线下雅集</td>
+            </tr>
+            <tr>
+              <td class="lead">政府文旅 / 宗教主管部门 / 投资机构</td>
+              <td>规范合规、文化担当、社会价值、可持续</td>
+              <td>行业洞察、规范化、文旅融合、可持续营造、社会责任</td>
+              <td>论坛、课题、白皮书、政企合作、官网背书</td>
+            </tr>
+            <tr>
+              <td class="lead">高净值禅修 / 传统文化爱好者</td>
+              <td>精神共鸣、东方美学、归属感</td>
+              <td>书院人文、禅意生活、器物美学、节气雅集</td>
+              <td>小红书、视频号、雅集、私享课程</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note"><strong>注：</strong>三类受众诉求迥异，内容需「一源多形」——同一品牌内核，针对不同人群变换切口与渠道，而不是各自为战。</div>
+    </section>
+
+    <!-- 四 -->
+    <section class="chap" id="c4">
+      <div class="chap-head"><span class="chap-no">四</span><h2>品宣内容模块（发散）</h2></div>
+
+      <p class="chap-intro">以六大「内容支柱」组织全部产出，每类都统一在同一条品牌主线下，兼顾「立专业」与「聚人心」。</p>
+
+      <h3>4.1 主张层 · 品牌叙事</h3>
+      <p class="body">承载品牌身份与价值，用于官网、图册、简介、开场白。示例选题：「一如的由来与初心」「何谓『一如初心，成就庄严』」「书院这一精神家园」。</p>
+
+      <h3>4.2 能力层 · 工艺与纪实</h3>
+      <p class="body">把无形能力可视化，是建立专业信任的关键。示例选题：《一凿一木》工匠与木作特写、《佛像定制的形与神》、古建营造工艺的纪录短片。</p>
+
+      <h3>4.3 作品层 · 案例叙事</h3>
+      <p class="body">最具说服力的内容，用「策划→设计→营造→运营」的全生命周期讲一个项目的完整故事。示例选题：某寺院整体营造故事、旧道场更新改造前后、空间「留白」在真实项目中的落地。</p>
+
+      <h3>4.4 知识层 · 专业科普</h3>
+      <p class="body">建立行业权威与搜索长尾，面向专业与政策人群。示例选题：《一间寺院的营造：相地、规制与落成》《古建木作十二讲》《寺院空间里，一处留白的讲究》等系列专栏。</p>
+
+      <h3>4.5 人文层 · 禅意生活</h3>
+      <p class="body">触达高净值与大众文化人群，软性种草。示例选题：节气雅集、禅意居所、器物美学、茶·香·空间、书院日常。</p>
+
+      <h3>4.6 观点层 · 行业与趋势</h3>
+      <p class="body">面向政府、投资与同行，抬升话语权。示例选题：《宗教文化空间的当代营造》议题文章、文旅融合下寺院运营的报告、可持续道场倡议。</p>
+    </section>
+
+    <!-- 五 -->
+    <section class="chap" id="c5">
+      <div class="chap-head"><span class="chap-no">五</span><h2>品宣方式 / 渠道矩阵</h2></div>
+
+      <h3>5.1 新媒体矩阵（定位分工）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="lead">平台</th><th>定位</th><th>内容形态</th></tr></thead>
+          <tbody>
+            <tr><td class="lead">公众号</td><td>品牌主阵地 · 权威与深度</td><td>案例叙事、知识专栏、观点文章、发布通告</td></tr>
+            <tr><td class="lead">视频号</td><td>纪实与温度</td><td>工艺/项目纪实短片、书院影像，与公众号联动</td></tr>
+            <tr><td class="lead">小红书</td><td>美学与生活方式</td><td>禅意空间、器物、雅集图文，触达高净值与文化人群</td></tr>
+            <tr><td class="lead">抖音</td><td>轻度试水 · 不做主力</td><td>现象级影像（如「一座寺院的落成」延时）择机少量投放</td></tr>
+            <tr><td class="lead">官网 / 案例库</td><td>权威资产驻地</td><td>品牌简介、案例库、团队、白皮书下载，作为所有流量的落点</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5.2 线下雅集与活动</h3>
+      <ul class="plain">
+        <li><strong>书院雅集：</strong>月度小规模、高质感，打造私域与口碑据点；</li>
+        <li><strong>行业论坛 / 主题沙龙：</strong>半年度一至两场，面向政府、投资与同行，争取权威背书；</li>
+        <li><strong>作品 / 影像巡展：</strong>以「留白」为题的静态影像或空间艺术展，传播力强、契合品牌调性；</li>
+        <li><strong>私享定制课程：</strong>面向高净值人群的禅修、古建、器物小班；</li>
+        <li><strong>参赛与评奖：</strong>行业设计奖、文旅奖、非遗相关荣誉，积累权威背书。</li>
+      </ul>
+
+      <h3>5.3 品牌物料与官网</h3>
+      <ul class="plain">
+        <li>品牌图册（已有，作为核心「手册」资产，持续迭代）；</li>
+        <li>一页纸项目介绍、能力单页、提案 PPT 母版；</li>
+        <li>统一影像库（项目、工艺、书院、器物四类）；</li>
+        <li>官网与案例库、联系方式/咨询入口。</li>
+      </ul>
+
+      <h3>5.4 内容底座（先搭，再外扩）</h3>
+      <p class="body">在铺渠道之前先落地的底层工程：资产盘点清单、品牌语汇表与视觉规范、内容模板与 SOP、素材版权与分级、私域（企业微信/社群）承接。</p>
+    </section>
+
+    <!-- 六 -->
+    <section class="chap" id="c6">
+      <div class="chap-head"><span class="chap-no">六</span><h2>年度内容节奏</h2></div>
+
+      <p class="chap-intro">以季度主题串联全年，每个季度聚焦一个主战场，避免全线平推、失去重点。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="lead">季度</th><th class="lead">主题</th><th>主战场</th><th>重点产出</th></tr></thead>
+          <tbody>
+            <tr><td class="lead">Q1</td><td class="lead">立名</td><td>品牌主张集中传播、资产盘点整合</td><td>官网上线、品牌叙事、图册定稿</td></tr>
+            <tr><td class="lead">Q2</td><td class="lead">展艺</td><td>工艺 / 作品纪实（视频号、公众号）</td><td>首支工序纪实、首个标杆案例叙事</td></tr>
+            <tr><td class="lead">Q3</td><td class="lead">见道</td><td>行业论坛 / 政策向议题</td><td>一场论坛、一份议题文章/白皮书</td></tr>
+            <tr><td class="lead">Q4</td><td class="lead">归心</td><td>雅集 / 人文收官</td><td>年终雅集、年度影像回顾、来年预告</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 七 -->
+    <section class="chap" id="c7">
+      <div class="chap-head"><span class="chap-no">七</span><h2>合规与宗教敏感性管理</h2></div>
+
+      <p class="chap-intro">宗教文化是敏感领域，品宣须把「拿捏分寸」作为底线能力内置到流程：</p>
+
+      <ul class="plain">
+        <li><strong>正信导向：</strong>内容弘扬正信、清净、庄严，不渲染神秘化、不碰争议义理；</li>
+        <li><strong>合规红线：</strong>遵守宗教事务相关法规，不借教敛财、不虚假宣传「功德/灵验」；</li>
+        <li><strong>视觉克制：</strong>延续「不出现具象人物、宗教符号、纹样」的品牌约束，避免敏感图像；</li>
+        <li><strong>尊重与统一：</strong>尊重不同宗派与客户习惯，对外口径与客户协商一致；</li>
+        <li><strong>审校机制：</strong>宗教相关内容设置「文化顾问 + 客户确认 + 专业审校」三级把关。</li>
+      </ul>
+    </section>
+
+    <!-- 八 -->
+    <section class="chap" id="c8">
+      <div class="chap-head"><span class="chap-no">八</span><h2>衡量指标（品牌认知维度）</h2></div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="lead">维度</th><th>指标（示例）</th></tr></thead>
+          <tbody>
+            <tr><td class="lead">触达</td><td>内容阅读/播放、平台粉丝与互动、官网与案例库访问</td></tr>
+            <tr><td class="lead">背书</td><td>媒体/行业账号引用、权威奖项、政企合作、被邀演讲场次</td></tr>
+            <tr><td class="lead">影响力</td><td>行业论坛参与、潜在客户主动咨询、人才投递、合作方主动接触</td></tr>
+            <tr><td class="lead">定性</td><td>目标人群对「一如」的品牌联想、心智占位（可后续做小样本访谈）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 九 -->
+    <section class="chap" id="c9" style="border-bottom:none;">
+      <div class="chap-head"><span class="chap-no">九</span><h2>落地优先级：90 天起步清单</h2></div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-idx"><div class="num">壹</div><div class="range">0–2 周</div></div>
+          <div class="step-body">
+            <h4>第一步 · 盘点整合</h4>
+            <ul class="plain">
+              <li>盘点现有案例、照片、影像、账号、图册与人员能力；</li>
+              <li>确定品牌语汇表与视觉规范（对接已有图册的墨黑留白调性）。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-idx"><div class="num">贰</div><div class="range">2–6 周</div></div>
+          <div class="step-body">
+            <h4>第二步 · 建底座</h4>
+            <ul class="plain">
+              <li>从六大内容支柱各产出 1 个标杆样本（如 1 篇品牌叙事 + 1 个案例叙事 + 1 篇知识专栏）；</li>
+              <li>搭建官网/案例库骨架与私域承接。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-idx"><div class="num">叁</div><div class="range">6–12 周</div></div>
+          <div class="step-body">
+            <h4>第三步 · 起势外扩</h4>
+            <ul class="plain">
+              <li>公众号 + 视频号首发标杆内容；</li>
+              <li>落地一场试点雅集，跑通线下 + 线上联动闭环。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="coda">
+      <p>本方案为基础框架，可在选定主战场后进一步细化为季度执行表与逐条内容排期。</p>
+      <div class="seal-line"></div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // 滚动高亮当前章节（桌面侧边目录）
+  (function () {
+    const links = document.querySelectorAll('aside.toc nav a');
+    const map = {};
+    links.forEach(a => {
+      const id = a.getAttribute('href').slice(1);
+      const sec = document.getElementById(id);
+      if (sec) map[id] = a;
+    });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(a => a.classList.remove('active'));
+          const link = map[e.target.id];
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    Object.keys(map).forEach(id => observer.observe(document.getElementById(id)));
+  })();
+
+  // 移动端：点击目录项后收起菜单
+  document.querySelectorAll('.mobile-bar nav a').forEach(a => {
+    a.addEventListener('click', () => {
+      const d = document.querySelector('.mobile-bar');
+      if (d) d.removeAttribute('open');
+    });
+  });
+</script>
+</body>
+</html>
